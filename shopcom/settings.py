@@ -73,7 +73,13 @@ WSGI_APPLICATION = 'shopcom.wsgi.application'
 IS_HEROKU = os.environ.get('IS_HEROKU', False)
 
 DEBUG = False
-
+DATABASES_ENGINE = True
+DATABASES_NAME = None
+DATABASES_USER = None
+DATABASES_PASSWORD = None
+DATABASES_HOST = None
+DATABASES_PORT = None
+DRIVER = None
 if IS_HEROKU:
     DEBUG = os.environ.get('DEBUG', False)
     DATABASES_ENGINE = os.environ.get('DATABASES_ENGINE', None)
@@ -140,3 +146,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
